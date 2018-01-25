@@ -1,0 +1,33 @@
+<persistence package="Datamodel">
+
+<!--
+<class name="klasse" tname="klasse" base="notizholder" version="0.11">
+        <property name="Jahrgangsstufe" type="int" cname="jhrg" ctype="int"></property>
+        <property name="Kursnummer" type="string" cname="kursnr" ctype="varchar(15)"></property>
+        <association name="Stunden" table="klasse_stunde" priCol="klasse_id" ascCol="stunde_id" ascClass="stunde"></association>
+        <reference name="Schuljahr"  refClass="datamodel/schuljahr"></reference>
+</class>
+-->
+
+<persistence package="Datamodel">
+
+
+<class name="actress" tname="actress" version="0.1">
+        <property name="Vorname" type="string" cname="vname" ctype="varchar(15)"></property>
+        <property name="Nachname" type="string" cname="nname" ctype="varchar(15)"></property>
+        <association name="Filme" table="actress_filme" priCol="actress_id" ascCol="film_id" ascClass="film"></association>
+</class>
+
+<class name="film" tname="film" version="0.5">
+        <property name="Title" type="string" cname="title" ctype="varchar(25)"></property>
+        <property name="Code" type="string" cname="code" ctype="varchar(10)"></property>
+        <property name="MovieFile" type="string" cname="movie" ctype="varchar(60)"></property>
+        <reference name="Actress" refClass="actress"></reference>
+        <reference name="Cover" refClass="cover"></reference>
+</class>
+
+<class name="cover" tname="cover" version="0.1">
+        <property name="FileName" type="string" cname="fname" ctype="varchar(60)"></property>
+</class>
+
+</persistence>
