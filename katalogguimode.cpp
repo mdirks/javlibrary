@@ -4,6 +4,8 @@
 #include <guiconfig.h>
 #include <datamodel/actressmapper.h>
 
+#include "filmitemtemplate.h"
+
 KatalogGuiMode::KatalogGuiMode()
     : GuiMode("KatalogMode")
 {
@@ -31,16 +33,15 @@ void KatalogGuiMode::setupMode()
             rp_film=re->getProperty("Filme");
         }
         mview = new PObjectIconView(sp);
-        mview->setItemTemplate(GuiRepository::getInstance()->getPObjectIconViewItemTemplate("film",mview));
+        mview->setItemTemplate(new FilmItemTemplate(mview));
 
         connect(aview,SIGNAL(currentChanged()),this,SLOT(resetActress()));
-        videow = new QVideoWidget(sp);
-
-        GuiRepository::getInstance()->registerVideoWidget(videow);
+        playerW = new MoviePlayer(sw);
+        GuiRepository::getInstance()->registerMoviePlayer(playerW);
 
         sp->addWidget(aview);
         sp->addWidget(mview);
-        sp->addWidget(videow);
+        sp->addWidget(playerW);
     }
     sp->setMinimumHeight(800);
     sp->setMinimumWidth(1200);
@@ -54,7 +55,7 @@ void KatalogGuiMode::setupMode()
 
 void KatalogGuiMode::resetActress()
 {
-    PObject *o=aview->getSelected();
+    PObject *o=aview->getCurrent();
     if(o){
         actress *a=dynamic_cast<actress*>(o);
         if(a){

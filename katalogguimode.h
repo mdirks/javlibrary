@@ -4,6 +4,8 @@
 #include <guimode.h>
 #include <pobjecticonview.h>
 
+#include <movieplayer.h>
+
 #include <QSplitter>
 #include <QtMultimediaWidgets/QVideoWidget>
 
@@ -22,7 +24,7 @@ private:
     PObjectIconView *aview, *mview;
     QSplitter *sp;
     RpListProvider *film_list;
-    QVideoWidget *videow;
+    MoviePlayer *playerW;
     RepositoryProperty *rp_film;
 };
 

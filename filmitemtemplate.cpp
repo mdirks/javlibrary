@@ -5,6 +5,26 @@
 #include <guirepository.h>
 #include <QPixmap>
 
+
+FilmItem::FilmItem(PObject *o, QListWidget *iv)
+    : PObjectIconViewItemBase(o,iv)
+{
+
+}
+
+
+void FilmItem::activateItem()
+{
+    if( film *f = dynamic_cast<film*>(getObject()) ){
+        QString mf = QString::fromStdString(f->getMovieFile());
+        //if(mf != QString()){
+            GuiRepository::getInstance()->showMovie(mf);
+
+        //}
+    }
+}
+
+
 FilmItemTemplate::FilmItemTemplate()
 {
     iv=0;
@@ -28,7 +48,7 @@ PObjectIconViewItemTemplate* FilmItemTemplate::getInstanceFor(QListWidget *lv)
 
 PObjectIconViewItemBase* FilmItemTemplate::createItem(PObject *o)
 {
-    PObjectIconViewItemBase *item=new PObjectIconViewItemBase(o,iv);
+    FilmItem *item=new FilmItem(o,iv);
     if(film *fm = dynamic_cast<film*>(o)){
         this->fm=fm;
         cover *c = fm->getCover();
@@ -39,6 +59,7 @@ PObjectIconViewItemBase* FilmItemTemplate::createItem(PObject *o)
             item->setIcon(QIcon(pm));
         }
     }
+    return item;
 }
 
 void FilmItemTemplate::resizeIcons()

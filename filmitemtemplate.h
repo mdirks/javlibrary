@@ -26,4 +26,13 @@ private:
     film *fm;
 };
 
+class FilmItem : public PObjectIconViewItemBase
+{
+public:
+    FilmItem(PObject *o, QListWidget *iv);
+
+    void activateItem();
+
+};
+
 #endif // FILMITEMTEMPLATE_H
