@@ -29,15 +29,18 @@
 
  actressmapper::actressmapper()
   {
- 	version = "0.1";
-	columns = new string[2];
- 	columnTypes = new string[2];
+ 	version = "0.2";
+	columns = new string[3];
+ 	columnTypes = new string[3];
  	columns[0] = "vname";
  	columnTypes[0] = "varchar(15)";
 	mapProperties["vname"] = new Property("vname");
 	columns[1] = "nname";
  	columnTypes[1] = "varchar(15)";
 	mapProperties["nname"] = new Property("nname");
+	columns[2] = "jname";
+ 	columnTypes[2] = "varchar(30)";
+	mapProperties["jname"] = new Property("jname");
 asc_Filme = new Association<actress, film>("actress_filme","actress_id","film_id","film", &actress::addToFilme, &actress::deleteFromFilme);
 mapAssociations["Filme"] = asc_Filme;
 registerAssociation( asc_Filme);
@@ -85,16 +88,17 @@ actressmapper::~actressmapper(){}
  
  int actressmapper::getColumnCount()
  {
-     return 2;
+     return 3;
  }
 
 
  string* actressmapper::getValues(PObject *realSubject)
  {
- 	string *values = new string[2];  
+ 	string *values = new string[3];  
  	actress *o = (actress*) realSubject;
 	values[0] = to_string(o->getVorname());
 	values[1] = to_string(o->getNachname());
+	values[2] = to_string(o->getJapaneseName());
 return values;
  }
 
@@ -119,6 +123,7 @@ void actressmapper::init(PObject* inito, Variant *res)
  	actress *o = (actress*) inito;
 	o->setVorname( res[0].asstring());
  	o->setNachname( res[1].asstring());
+ 	o->setJapaneseName( res[2].asstring());
  	inito->init();
 }
 
@@ -147,6 +152,7 @@ RepositoryEntry* actressmapper::getRepositoryEntry()
 	entry->addProperty( new StringProperty<actress>("Name", "string", &actress::getName, &actress::setName, false) );
 	entry->addProperty( new StringProperty< actress >( "Vorname" , "string", &actress::getVorname, &actress::setVorname, false ) );
 	entry->addProperty( new StringProperty< actress >( "Nachname" , "string", &actress::getNachname, &actress::setNachname, false ) );
+	entry->addProperty( new StringProperty< actress >( "JapaneseName" , "string", &actress::getJapaneseName, &actress::setJapaneseName, false ) );
 	entry->addProperty( new CollectionPropertyImpl<film,actress>( "Filme" , "film", &actress::getFilme, &actress::addToFilme, &actress::deleteFromFilme  ) ); 
 	return entry;
  }

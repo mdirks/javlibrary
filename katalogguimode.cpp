@@ -38,6 +38,7 @@ void KatalogGuiMode::setupMode()
         connect(aview,SIGNAL(currentChanged()),this,SLOT(resetActress()));
         playerW = new MoviePlayer(sw);
         GuiRepository::getInstance()->registerMoviePlayer(playerW);
+        connect(mview,SIGNAL(currentChanged()),this,SLOT(resetMovie()));
 
         sp->addWidget(aview);
         sp->addWidget(mview);
@@ -60,7 +61,16 @@ void KatalogGuiMode::resetActress()
         actress *a=dynamic_cast<actress*>(o);
         if(a){
             mview->setObjectListProvider(new RpListProvider(rp_film,a));
-            }
+            playerW->stop();
+        }
     }
 
+}
+
+void KatalogGuiMode::resetMovie()
+{
+    PObject *o=mview->getCurrent();
+    if(film *f=dynamic_cast<film*>(o)){
+        playerW->show(QString::fromStdString(f->getMovieFile()));
+    }
 }

@@ -10,16 +10,16 @@
  // 
  // Written on So. Jan. 28 14:33:14 2018
 // 
- #ifndef actressMAPPER_H 
- #define actressMAPPER_H 
+ #ifndef dictionaryMAPPER_H 
+ #define dictionaryMAPPER_H 
  
  #include <persistence/pobject.h> 
  #include <mapping/mappedobject.h> 
 #include <mapping/association.h> 
 #include <mapping/murl.h> 
 #include <persistence/persistenceclass.h> 
- #include "actress.h" 
-#include "film.h" 
+ #include "dictionary.h" 
+#include "dicentry.h" 
 #include <mapping/abstractmapper.h>
  #include <persistence/variant.h>
  #include <repository/repositoryentryimpl.h>
@@ -36,12 +36,12 @@
  /** 
  @author Marcus Dirks 
  */ 
- class actressmapper : public AbstractMapper, public RepositoryEnabled
+ class dictionarymapper : public AbstractMapper, public RepositoryEnabled
 {
  public:
-     static actressmapper* getInstance();
-     ~actressmapper();
-     static actress* create();
+     static dictionarymapper* getInstance();
+     ~dictionarymapper();
+     static dictionary* create();
 
      string getTableName();
      string getClassName();
@@ -52,23 +52,23 @@
      void save();
      void save(PObject *realSubject);
      PObject* createNewObject();
-     list<actress*>* find();
+     list<dictionary*>* find();
     void init(PObject* o, Variant* res);
     RepositoryEntry *getRepositoryEntry();
 
-  list<film*> * findFilme(int pri_id);
-  list<film*> * findFilme(int pri_id,string prop,string value);
+  list<dicentry*> * findEntries(int pri_id);
+  list<dicentry*> * findEntries(int pri_id,string prop,string value);
 
 protected:
-     actressmapper();
+     dictionarymapper();
  
  private:
-    static actressmapper* instance;
+    static dictionarymapper* instance;
  
 
    string *columnTypes;
     string *columns;
-  Association<actress, film> *asc_Filme;
+  Association<dictionary, dicentry> *asc_Entries;
   
  
  };

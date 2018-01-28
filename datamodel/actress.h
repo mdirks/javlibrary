@@ -18,14 +18,19 @@ public:
     void setVorname(string n);
     string getNachname();
     void setNachname(string n);
+    string getJapaneseName();
+    void setJapaneseName(string n);
+
 
 
     list<film*> *getFilme();
     void addToFilme(film*);
     void deleteFromFilme(film*);
 
+    string getName();
+
 private:
-    string vname,nname;
+    string vname,nname,jname;
     list<film*> *list_filme;
 };
 

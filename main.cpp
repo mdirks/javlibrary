@@ -8,6 +8,7 @@
 #include <standardguimode.h>
 #include "filmitemtemplate.h"
 #include "katalogguimode.h"
+#include "dictionaryaction.h"
 
 int main(int argc, char *argv[])
 {
@@ -22,6 +23,7 @@ int main(int argc, char *argv[])
     GuiRepository::getInstance()->addMode(new StandardGuiMode());
     GuiRepository::getInstance()->addMode(new KatalogGuiMode());
     GuiRepository::getInstance()->addGlobalAction(new ReadFileAction());
+    GuiRepository::getInstance()->addGlobalAction(new DictionaryAction());
     GuiRepository::getInstance()->registerPObjectIconViewItemTemplate(QString("film"),new FilmItemTemplate());
     /*
     MainWindow w;

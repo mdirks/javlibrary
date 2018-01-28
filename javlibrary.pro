@@ -43,7 +43,13 @@ SOURCES += main.cpp\
     datamodel/covermapper.cpp \
     datamodel/datamodelobjectfactory.cpp \
     filmitemtemplate.cpp \
-    katalogguimode.cpp
+    katalogguimode.cpp \
+    datamodel/dictionary.cpp \
+    datamodel/dicentrymapper.cpp \
+    datamodel/dictionarymapper.cpp \
+    datamodel/dicentry.cpp \
+    dictonaryguimode.cpp \
+    dictionaryaction.cpp
 
 HEADERS  += mainwindow.h \
     datamodel/actress.h \
@@ -56,7 +62,13 @@ HEADERS  += mainwindow.h \
     datamodel/covermapper.h \
     datamodel/datamodelobjectfactory.h \
     filmitemtemplate.h \
-    katalogguimode.h
+    katalogguimode.h \
+    datamodel/dictionary.h \
+    datamodel/dicentrymapper.h \
+    datamodel/dictionarymapper.h \
+    datamodel/dicentry.h \
+    dictonaryguimode.h \
+    dictionaryaction.h
 
 FORMS    += mainwindow.ui
 

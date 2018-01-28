@@ -14,6 +14,7 @@
 #include "datamodel/actressmapper.h"
 #include "datamodel/filmmapper.h"
 #include "datamodel/covermapper.h"
+#include "datamodel/dictionarymapper.h"
 
 #include <transactions/transactions.h>
 
@@ -22,6 +23,21 @@ ReadFileAction::ReadFileAction()
 {
     setIcon(GuiConfig::getInstance()->getIcon("read_file"));
     connect(this,SIGNAL(triggered(bool)),this,SLOT(readFile(bool)));
+
+    list<dictionary*> *ldic = dictionarymapper::getInstance()->find();
+    if(ldic->size()==0){
+        dic=dictionarymapper::create();
+        Transactions::getCurrentTransaction()->add(dic);
+    } else {
+        dic=ldic->front();
+    }
+}
+
+
+void ReadFileAction::addToDic(QString vn, QString nn)
+{
+    dic->addEntry(vn.toStdString(),nn.toStdString(),"");
+
 }
 
 void ReadFileAction::readFile(bool b)
@@ -85,6 +101,7 @@ void ReadFileAction::readFile(bool b)
                 ac->setNachname(nname.toStdString());
                 lp_actress->addObject(ac);
             }
+            //dic->addEntry(vname.toStdString(),nname.toStdString(),"");
 
             f_f_c->setValueString(code.toStdString());
             list<PObject*> *film_match = new list<PObject*>();
@@ -113,7 +130,7 @@ void ReadFileAction::readFile(bool b)
             ac->addToFilme(f);
             Transactions::getCurrentTransaction()->add(f);
             Transactions::getCurrentTransaction()->add(ac);
-
+            //Transactions::getCurrentTransaction()->add(dic);
         }
     }
 }

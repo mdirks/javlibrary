@@ -19,6 +19,7 @@ public:
 
 public slots:
     void resetActress();
+    void resetMovie();
 
 private:
     PObjectIconView *aview, *mview;

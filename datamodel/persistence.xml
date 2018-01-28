@@ -12,9 +12,10 @@
 <persistence package="Datamodel">
 
 
-<class name="actress" tname="actress" version="0.1">
+<class name="actress" tname="actress" version="0.2">
         <property name="Vorname" type="string" cname="vname" ctype="varchar(15)"></property>
         <property name="Nachname" type="string" cname="nname" ctype="varchar(15)"></property>
+        <property name="JapaneseName" type="string" cname="jname" ctype="varchar(30)"></property>
         <association name="Filme" table="actress_filme" priCol="actress_id" ascCol="film_id" ascClass="film"></association>
 </class>
 
@@ -29,5 +30,16 @@
 <class name="cover" tname="cover" version="0.1">
         <property name="FileName" type="string" cname="fname" ctype="varchar(60)"></property>
 </class>
+
+<class name="dictionary" tname="dictionary" version="0.1">
+        <association name="Entries" table="dic_entries" priCol="dic_id" ascCol="entry_id" ascClass="dicentry"></association>
+</class>
+
+<class name="dicentry" tname="dicentry" version="0.1">
+        <property name="Vorname" type="string" cname="vname" ctype="varchar(15)"></property>
+        <property name="Nachname" type="string" cname="nname" ctype="varchar(15)"></property>
+        <property name="Japanese" type="string" cname="jname" ctype="varchar(30)"></property>
+ </class>
+
 
 </persistence>

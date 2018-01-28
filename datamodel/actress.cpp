@@ -29,6 +29,15 @@ void actress::setNachname(string n)
     setName(vname + " " + nname);
 }
 
+string actress::getJapaneseName()
+{
+    return jname;
+}
+
+void actress::setJapaneseName(string n)
+{
+    jname=n;
+}
 
 
 list<film*> *actress::getFilme()
@@ -47,4 +56,14 @@ void actress::addToFilme(film *f)
 void actress::deleteFromFilme(film *f)
 {
     getFilme()->remove(f);
+}
+
+string actress::getName()
+{
+    if(getJapaneseName()!=""){
+        return getJapaneseName();
+    } else {
+        return PObject::getName();
+    }
+
 }
